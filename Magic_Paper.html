@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Paper</title>
+    <style>
+        body{
+            font-family: system-ui;
+            background-color: #F2BDD0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+        .box-numbers {
+            width:500px;
+            height: 500px;
+            max-width: 100%;
+            max-height: 100%;
+            display: grid;
+            grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+            grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+        }
+        .char-result {
+            font-size: xxx-large;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <p>
+            Bước 1: Lấy 1 số có 2 chữ số rồi trừ cho tổng các chữ số của nó
+            <br>Ví dụ: lấy số 45, số cần tìm = 45 - (4+5) = 36
+            <br>Bước 2: Nhìn vào bảng bên dưới tìm biểu tượng ứng với con số kia. 
+            <br>Bước 3: Ấn vào nút hiện kết quả :>>>
+        </p>
+        <div class="box-numbers"></div>
+        <button>Hiện kết quả</button>
+    </div>
+    
+    <script>
+        $(document).ready(function () 
+    {
+    // Hàm tạo ký tự ngẫu nhiên
+    function randomChar() 
+    {
+        // Ngẫu nhiên số từ 1 đến 10
+        $randomChar = Math.floor(Math.random() * 11);
+        // Nếu số ngẫu nhiên bằng n thì ký tự là $char
+        switch ($randomChar) {
+        case 1:
+            $char = '<i class="fa-solid fa-fire"></i>';
+            break;
+        case 2:
+            $char = '<i class="fa-solid fa-phone"></i>';
+            break;
+        case 3:
+            $char = '<i class="fa-solid fa-medal"></i>';
+            break;
+        case 4: 
+            $char = '<i class="fa-solid fa-asterisk"></i>';
+            break;
+        case 5:
+            $char = '<i class="fa-brands fa-snapchat"></i>';
+            break;
+        case 6:
+            $char = '<i class="fa-solid fa-clock-rotate-left"></i>';
+            break;
+        case 7:
+            $char = '<i class="fa-solid fa-hat-wizard"></i>';
+            break;
+        case 8:
+            $char = '<i class="fa-brands fa-pagelines"></i>';
+            break;
+        case 9:
+            $char = '<i class="fa-regular fa-heart"></i>';
+            break;
+        case 10:
+            $char = '<i class="fa-solid fa-palette"></i>';
+            break;
+        }
+    }
+ 
+    // Tạo bảng số từ 0 đến 99 và ký tự ngẫu nhiên 
+    for ($m = 0; $m <= 99; $m++) {
+        // Thực hiện các hành động $m lần và dừng lại khi $m <= 99
+        // Chạy hàm ngẫu nhiên ký tự
+        randomChar();
+        // Tạo các ô số từ 0 đến 99 và ký tự trong thẻ div có class là box-number
+        $('.box-numbers').append('<div class="number" data-number="'+ $m +'">' + $m + '<br>' + $char + '</div>');
+    }
+ 
+    // Thiết lập các ô số 9, 18, 27, 36, 45, 54, 63, 72, 81 có ký tự chung 
+    // Chạy hàm ngẫu nhiên ký tự
+    randomChar();
+ 
+    $('.number[data-number="9"]').html('9<br>' + $char);
+    $('.number[data-number="18"]').html('18<br>' + $char);
+    $('.number[data-number="27"]').html('27<br>' + $char);
+    $('.number[data-number="36"]').html('36<br>' + $char);
+    $('.number[data-number="45"]').html('45<br>' + $char);
+    $('.number[data-number="54"]').html('54<br>' + $char);
+    $('.number[data-number="63"]').html('64<br>' + $char);
+    $('.number[data-number="72"]').html('72<br>' + $char);
+    $('.number[data-number="81"]').html('81<br>' + $char);
+    $('.number[data-number="99"]').html('99<br>' + $char);
+    
+    $('button').click(function () {
+        $(this).hide(); // Ẩn chính nó tức là thẻ button
+        $('.box-numbers').hide(); // Ẩn div class  box-numbers tức là cái bảng
+        $('p').hide()
+        var ket_qua = $('.number[data-number="9"] i').attr('class');
+        $('.container').append('<p>Kết quả mà bạn đang nghĩ tới là: </p><span class="char-result ' + ket_qua + '"></span>')
+    });
+})
+
+    </script>
+</body>
+</html>
